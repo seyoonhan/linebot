@@ -21,7 +21,7 @@ public class Content {
     String from;
     DateTime createdTime;
     List<String> to;
-    ToType toType;
+    ToType toType = ToType.USER;
     Map<String, Object> contentMetaData;
     String text;
     Location location;

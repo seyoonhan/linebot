@@ -32,7 +32,7 @@ public class DefaultLineBot implements InitializingBean, ApiPath{
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("X-Line-ChannelID", channelInfo.getChannelId());
         headers.add("X-Line-ChannelSecret", channelInfo.getChannelSecret());
-        headers.add("X-Line-Trusted-User-With-ACL", channelInfo.getChannelId());
+        headers.add("X-Line-Trusted-User-With-ACL", channelInfo.getChannelOwnerMID());
         headers.add("Content-Type", "application/json; charser=UTF-8");
         return headers;
     }

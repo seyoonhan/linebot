@@ -1,14 +1,21 @@
 package com.linebot.connector.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Created by han on 2016. 4. 12..
  */
 public enum ToType {
-    TYPE1(1);
+    USER(1);
 
-    int type;
+    int code;
 
-    ToType(int type){
-        this.type = type;
+    ToType(int code) {
+        this.code = code;
+    }
+
+    @JsonValue
+    public int getCode() {
+        return this.code;
     }
 }

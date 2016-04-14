@@ -1,7 +1,6 @@
 package com.linebot.connector.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
@@ -10,8 +9,9 @@ import java.util.List;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message {
-
     String from;
     String fromChannel;
     List<String> to;
