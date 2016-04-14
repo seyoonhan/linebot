@@ -28,8 +28,6 @@ public class Content {
     String originalContentUrl;
     String previewImageUrl;
 
-
-
     //operation
     List<String> params;
 

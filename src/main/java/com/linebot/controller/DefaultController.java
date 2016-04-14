@@ -22,9 +22,13 @@ public class DefaultController {
     @Autowired
     ChannelInfoRepository channelInfoRepository;
 
-    @RequestMapping("/send/message")
+    @RequestMapping("/send/message/test")
     public HashMap send() {
-        ChannelInfo channelInfoByMid = channelInfoRepository.getChannelInfoByMid(null);
+        ChannelInfo channelInfoByMid = channelInfoRepository.findByChannelOwnerMID("u8b86fe2b0f3eca4fe5e56292a34ba914");
+        if(channelInfoByMid == null){
+            channelInfoByMid = new ChannelInfo("1463751543", "4773e1315bd085eb56d77f6d8003cc44", "u8b86fe2b0f3eca4fe5e56292a34ba914");
+        }
+
         Content content = Content.builder().contentType(ContentType.TEXT).text("test message").toType(ToType.USER).build();
 
         SendMessage sendMessage = new SendMessage();
