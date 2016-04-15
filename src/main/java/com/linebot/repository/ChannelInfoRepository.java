@@ -1,4 +1,4 @@
-package com.linebot.connector.repository;
+package com.linebot.repository;
 
 import com.linebot.connector.model.ChannelInfo;
 import org.springframework.data.mongodb.repository.MongoRepository;

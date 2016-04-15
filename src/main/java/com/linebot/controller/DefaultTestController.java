@@ -3,7 +3,11 @@ package com.linebot.controller;
 import com.google.common.collect.Lists;
 import com.linebot.connector.client.DefaultLineBot;
 import com.linebot.connector.model.*;
-import com.linebot.connector.repository.ChannelInfoRepository;
+import com.linebot.repository.ChannelInfoRepository;
+import com.linebot.user.enumeration.UserType;
+import com.linebot.user.model.User;
+import com.linebot.user.service.UserService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +18,7 @@ import java.util.HashMap;
  * Created by han on 2016. 4. 12..
  */
 @RestController
-public class DefaultController {
+public class DefaultTestController {
 
     @Autowired
     DefaultLineBot defaultLineBot;
@@ -22,11 +26,14 @@ public class DefaultController {
     @Autowired
     ChannelInfoRepository channelInfoRepository;
 
-    @RequestMapping("/send/message/test")
+    @Autowired
+    UserService userService;
+
+    @RequestMapping("/send/message")
     public HashMap send() {
         ChannelInfo channelInfoByMid = channelInfoRepository.findByChannelOwnerMID("u8b86fe2b0f3eca4fe5e56292a34ba914");
         if(channelInfoByMid == null){
-            channelInfoByMid = new ChannelInfo("1463751543", "4773e1315bd085eb56d77f6d8003cc44", "u8b86fe2b0f3eca4fe5e56292a34ba914");
+            channelInfoByMid = new ChannelInfo("u8b86fe2b0f3eca4fe5e56292a34ba914", "1463751543", "4773e1315bd085eb56d77f6d8003cc44");
         }
 
         Content content = Content.builder().contentType(ContentType.TEXT).text("test message").toType(ToType.USER).build();
@@ -40,4 +47,14 @@ public class DefaultController {
         return defaultLineBot.sendMessage(channelInfoByMid, sendMessage);
 
     }
+
+    @RequestMapping("/newuser")
+    public User makeUser() {
+        User user = User.builder().userType(UserType.NORMAL).id("test").pw("test").mid("u8b86fe2b0f3eca4fe5e56292a34ba914").registered(DateTime.now()).build();
+        ChannelInfo channelInfo = new ChannelInfo("u8b86fe2b0f3eca4fe5e56292a34ba914", "1463751543", "4773e1315bd085eb56d77f6d8003cc44");
+        Object insert = channelInfoRepository.insert(channelInfo);
+        return userService.save(user);
+    }
+
+
 }
