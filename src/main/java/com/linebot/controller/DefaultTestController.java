@@ -4,9 +4,11 @@ import com.google.common.collect.Lists;
 import com.linebot.connector.client.DefaultLineBot;
 import com.linebot.connector.model.*;
 import com.linebot.repository.ChannelInfoRepository;
+import com.linebot.user.UserHelper;
 import com.linebot.user.enumeration.UserType;
 import com.linebot.user.model.User;
 import com.linebot.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import java.util.HashMap;
  * Created by han on 2016. 4. 12..
  */
 @RestController
+@Slf4j
 public class DefaultTestController {
 
     @Autowired
@@ -31,6 +34,10 @@ public class DefaultTestController {
 
     @RequestMapping("/send/message")
     public HashMap send() {
+
+        User currentUser = UserHelper.getCurrentUser();
+        log.debug(currentUser.getId());
+
         ChannelInfo channelInfoByMid = channelInfoRepository.findByChannelOwnerMID("u8b86fe2b0f3eca4fe5e56292a34ba914");
         if(channelInfoByMid == null){
             channelInfoByMid = new ChannelInfo("u8b86fe2b0f3eca4fe5e56292a34ba914", "1463751543", "4773e1315bd085eb56d77f6d8003cc44");

@@ -23,4 +23,12 @@ public class UserService {
         return (User) userInfoRepository.save(user);
     }
 
+    public User findUserById(String id){
+        return userInfoRepository.findById(id);
+    }
+
+    public User findUserByMid(String mid){
+        return userInfoRepository.findByMid(mid);
+    }
+
 }
